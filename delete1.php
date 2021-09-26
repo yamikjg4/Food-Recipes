@@ -1,7 +1,7 @@
 <?php 
 include("config.php");
-$id=$_GET['id'];
-$query="DELETE FROM ingredant_type WHERE type_id=$id";
+$id=$_GET['cid'];
+$query="DELETE FROM food WHERE Food_id=$id";
 $execute=mysqli_query($con,$query);
 if($execute){
 ?>

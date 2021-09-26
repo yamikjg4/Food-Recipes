@@ -24,6 +24,16 @@
         $filenameabc = $_FILES["uploadfile"]["name"]; 
         $tempname = $_FILES["uploadfile"]["tmp_name"]; 
         $folder = "image/".$filenameabc;
+        if (move_uploaded_file($tempname, $folder))  { 
+
+            $msg = "Image uploaded successfully"; 
+    
+        }
+    else{ 
+    
+            $msg = "Failed to upload image"; 
+      } 
+    
         $chefid=$_SESSION['u_id'];
         $query="SELECT * FROM food WHERE Chef_id=$chefid AND Food_Name='$fname'";
         $exe=mysqli_query($con,$query);
@@ -273,8 +283,8 @@ alert("already avalible");
         $('#form1').show();
     });
     $('#nexf').click(function() {
-        console.log();
-        alert();
+        // console.log();
+        // alert();
         $('#form3').show();
         $('#form2').hide();
         // alert();

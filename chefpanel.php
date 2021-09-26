@@ -129,10 +129,59 @@ include("config.php");
         <?php
       }
       ?>
+      <?php
+      $l=1;
+      $num_pages=5;
+      if(isset($_GET['page'])){
+        $page=$_GET['page'];
+      }
+      else{
+        $page=1;
+      }
+      $start_page=($page-1)*05;
+      $show="SELECT Food_Name,category_name,Food_Image,Food_id  from food join category on category.cat_id=food.Cat_id limit $start_page,$num_pages";
+      $resm=mysqli_query($con,$show);
+      ?>
         </table>
           </div> 
-     </div>
-
+          <div class="table-responsive-sm" id="table3">
+            <table class="table table-borderless table-hover table-dark mt-3">
+              <thead class="bg-success">
+                <tr>
+                    <th>Food_id</th>
+                    <th>Food_Image</th>
+                    <th>Food_Name</th>
+                    <th>Category</th>
+                    <th>Delete</th>
+                    </tr>
+              </thead>
+              <?php
+                while($arr2=mysqli_fetch_array($resm)){
+                ?>
+              <tbody>
+              <tr>
+                <td class="align-middle"><?php echo $arr2["Food_id"];?></td>
+                <td><img src="<?php echo $arr2["Food_Image"];?>" class="image-fluid" width="90px" height="100px"></td>
+                <td class="align-middle"><?php echo $arr2["Food_Name"];?></td>
+                <td class="align-middle"><?php echo $arr2["category_name"];?></td>
+                <td class="align-middle"><a href="delete1.php?cid=<?php echo $arr2["Food_id"];?>" class="delte" onclick="return checkdelete()"><i class="fa fa-trash"></i></a></td> 
+              </tr>
+              <?php
+                }
+              ?>
+              </tbody>
+            </table>
+            <?php
+            $countno="SELECT * FROM food where Chef_id ='$id'";
+            $ressu=mysqli_query($con,$countno);
+            $no=mysqli_num_rows($ressu);
+            $total_page=ceil($no/$num_pages);
+           for($k=1;$k<=$total_page;$k++){
+            ?>
+          <a class="btn btn-primary btn-inline-block"href="chefpanel.php?page=<?php echo $k?>"><?php echo $k;?></a>
+<?php
+           }
+?>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -148,10 +197,17 @@ include("config.php");
                 $('#div1').click(function(){
                     $('#table1').toggle(300);
                     $('#table2').hide(150);
+                    $('#table3').hide();
                 });
                 $('#div2').click(function(){
                   $('#table1').hide(150);
+                  $('#table3').hide();
                   $('#table2').toggle(300);
+                });
+                $('#div3').click(function(){
+                  $('#table3').toggle(300);
+                    $('#table2').hide(150);
+                    $('#table1').hide();
                 });
                 
             });
