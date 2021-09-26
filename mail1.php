@@ -1,12 +1,14 @@
 <?php
 $to=$_SESSION['email'];
+$line="\n";
             $subject="For New Chef Registation";
-            $message="(UserName)Email: ".$_SESSION['email'].'(Password)Password: '.$_SESSION['pass'];
-             if(mail($to,$subject,$message,$message1)){
+            $message = 'Hi '.$_SESSION['user'].$line.'Your email Id:'.$_SESSION['email'].$line.'Updated Password:'.$_SESSION['pass'];
+             if(mail($to,$subject,$message)){
                 echo' <script>
                 alert("Mail Send Sucessfully");
                 true;
-            </script>';  
+            </script>';
+            // header("location:true.php");  
              }
              else{
                 echo' <script>

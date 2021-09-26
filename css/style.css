@@ -52,6 +52,7 @@ h1 {
 .login input {
     width: 100%;
     margin-bottom: 10px;
+    /* background-color: transparent; */
 }
 
 .login a {
@@ -65,9 +66,11 @@ h1 {
     color: #39dc79;
 }
 
-.login input[type="email"],
+.login input[type="text"],
 input[type="password"] {
-    border: none;
+    border-top: none;
+    border-right: none;
+    border-left: none;
     border-bottom: 1px solid #fff;
     background: transparent;
     outline: none;
@@ -76,8 +79,7 @@ input[type="password"] {
     font-size: 16px;
 }
 
-input[type="password"],
-input[type="tel"],
+.login input[type="password"],
 input[type="text"] {
     border: none;
     border-bottom: 1px solid #fff;

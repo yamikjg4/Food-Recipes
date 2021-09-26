@@ -1,5 +1,5 @@
 <?php
-include("session.php");
+include("session/chef_ses.php");
 ?>
 <!-- <link rel="icon" href="LogoMakerCa-1629816030209.PNG"> -->
 <nav class="navbar navbar-expand-md navbar-light blue fixed-top">
@@ -31,25 +31,28 @@ include("session.php");
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h4><i class="fas fa-user"></i>
-                    <?php echo $_SESSION['admin']?>
+                    <?php echo $_SESSION['User']?>
                 </h4>
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="admindash.php"><i class="fas fa-home"></i>Home</a>
+                    <a href="chefpanel.php"><i class="fas fa-home"></i>Home</a>
                 </li>
                 <li>
-                    <a href="admindash.php"><i class="fas fa-clipboard"></i>Dashboard</a>
+                    <a href="chefpanel.php"><i class="fas fa-clipboard"></i>Dashboard</a>
                 </li>
                 <li>
-                    <a href="chef.php"><i class="fas fa-user-cog"></i>Chef</a>
+                    <a href="type.php"><i class="fas fa-poll-h"></i>Ingredant-type</a>
                 </li>
                 <li>
-                    <a href=""><i class="fas fa-hands-helping"></i>Categories</a>
+                    <a href="recipe.php"><i class="fas fa-hamburger"></i>Food-Recipe</a>
                 </li>
-                <li>
+                <!-- <li>
+                    <a href=""><i class="fas fa-users"></i>Profile</a>
+                </li> -->
+                <!-- <li>
                     <a href=""><i class="fas fa-info"></i>Feedback</a>
-                </li>
+                </li> -->
             </ul>
         </nav>
        

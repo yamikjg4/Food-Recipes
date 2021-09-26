@@ -59,16 +59,16 @@ function validateFileType() {
     }
 }
 
-function email1() {
+function email() {
     var a = document.getElementById("typeemail").value;
     if (!a.trim()) {
         document.getElementById("email").innerHTML = "Pls Enter Email";
         document.getElementById("email").style.color = "Red";
     }
-
+    // alert();
 }
 
-function email() {
+function checkvalid() {
     var a = document.getElementById("typeemail").value;
     regex = /^[\w\d._%+-]+@(?:[\w\d-]+\.)+(\w{2,})(,|$)/;
     if (a.trim()) {
@@ -81,6 +81,7 @@ function email() {
             document.getElementById("email").style.color = "red";
         }
     }
+    // alert("called");
 }
 
 function pass() {

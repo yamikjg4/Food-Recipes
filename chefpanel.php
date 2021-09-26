@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style2.css">
+    <link rel="icon" href="LogoMakerCa-1629816030209.PNG">
+    <style>
+        .edit{
+            color: white;
+        }
+        .delte:hover{
+            color: red;
+        }
+    </style>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- FONTAWESOME : https://kit.fontawesome.com/a23e6feb03.js -->
+    <link rel="stylesheet"   href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.  5/jquery.mCustomScrollbar.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+<?php
+include("template/template1.php");
+?> 
+<?php 
+include("config.php");
+?>   
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-6 p-1">
+                <div class="w-100" id="div1"><p class="h5 pt-5 text-center text-white">Category</p>
+                <?php
+            // include ("config.php");
+            $que2="SELECT COUNT(category_name)From category";
+            $exe1=mysqli_query($con,$que2);
+            $arr1=mysqli_fetch_array($exe1);
+            // $row=mysqli_num_rows($exe);
+            ?>
+            <h6 class="text-center text-white"><?php echo $arr1[0];?></h6>
+            </div>
+            </div>
+            <div class="col-md-3 col-6 p-1">
+            <div class="w-100" id="div2"><p class="h5 pt-5 text-center text-white">Ingredant-Type</p>
+            <?php
+            $id=$_SESSION['u_id'];
+            $count="SELECT COUNT(type_name)From ingredant_type WHERE id=$id ";
+            $execute=mysqli_query($con,$count);
+            $result=mysqli_fetch_array($execute);
+            ?>
+            <h6 class="text-center text-white">  <?php echo $result[0];?></h6>
+    </div>
+            </div>
+            <div class="col-md-3 col-6 p-1">
+            <div class="w-100" id="div3"><p class="h5 pt-5 text-center text-white">Food-Recipe</p>
+            <?php
+            $countque="SELECT COUNT(Food_Name) FROM food WHERE Chef_id=$id";
+            $exek=mysqli_query($con,$countque);
+            $resum=mysqli_fetch_array($exek);
+            ?>
+             <h6 class="text-center text-white">  <?php echo $resum[0];?></h6>
+             </div>
+            </div>
+            <div class="col-md-3 col-6 p-1">
+            <div class="w-100" id="div4"><p class="h5 pt-5 text-center text-white">Feedback</div>
+            </div>
+        </div>
+    </div>
+   
+        <?php
+        $que3="SELECT * FROM category";
+        $exes=mysqli_query($con,$que3);
+        ?>
+        <tr>
+          <?php $j=1;?>
+          <div class="table-responsive-sm" id="table1" style="display:none">
+      <table class="table table-borderless table table-hover table-dark mt-3" >
+      <thead class="bg-warning">  
+        
+      <tr>
+          <th>Category_id</th>
+          <th>Category_Image</th>
+          <th>Category_Name</th>
+          <!-- <th>Operation</th> -->
+        </tr>
+        </thead>
+<?php        while($output=mysqli_fetch_array($exes)){ ?>
+
+        <tr>
+          <td><?php echo $j++;?></td>
+          <td><img src="<?php echo $output["category_image"];?>" style="width:75px; height:75px;"></td>
+          <td><?php echo $output["category_name"];?></td>
+          <!-- <td>  <a href="delete.php?cid=<?php echo $output["cat_id"];?>" class="delte" onclick="return checkdelete()"><i class="fa fa-trash"></i></a></td> -->
+        </tr>
+        <?php
+      }
+      ?>
+        </table>
+          </div> 
+        
+      <?php
+      $showdata="SELECT type_id,type_name FROM ingredant_type WHERE id=$id";
+      $execute1=mysqli_query($con,$showdata);
+      ?>
+      <?php $i=1;?>
+       <div class="table-responsive-sm" id="table2" style="display:none">
+      <table class="table table-borderless table table-hover table-dark mt-3" >
+      <thead class="bg-warning">  
+      <tr>
+          <th>Type_id</th>
+          <th>Type_Name</th>
+          <!-- <th>Delete</th> -->
+          <!-- <th>Operation</th> -->
+        </tr>
+        </thead>
+        <?php
+        while($result1=mysqli_fetch_array($execute1))
+      {
+     ?>
+          <td><?php echo $i++?></td>
+          <td><?php echo $result1["type_name"];?></td>
+          <!-- <td> <a href="delete1.php?id=<?php echo $result1["type_id"];?>" class="delte" onclick="return checkdelete()">
+            <i class="fa fa-trash"></i></a></td>
+          <td>  <a href="delete.php?cid=<?php echo $output["cat_id"];?>" class="delte" onclick="return checkdelete()"><i class="fa fa-trash"></i></a></td> -->
+        </tr>
+        <?php
+      }
+      ?>
+        </table>
+          </div> 
+     </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function() {
+                $('#sidebarCollapse').on('click', function() {
+                    $('#sidebar, #content').toggleClass('active');
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                    document.getElementById("bodyContent").style.width = "100%";
+                });
+                $('#div1').click(function(){
+                    $('#table1').toggle(300);
+                    $('#table2').hide(150);
+                });
+                $('#div2').click(function(){
+                  $('#table1').hide(150);
+                  $('#table2').toggle(300);
+                });
+                
+            });
+            function checkdelete(){
+              return confirm("Are You Delete This Record");
+            }
+        </script>
+
+</body>
+</html>
