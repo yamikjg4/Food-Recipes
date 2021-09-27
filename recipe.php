@@ -40,15 +40,17 @@
         $count=mysqli_num_rows($exe);
         if($count>0){
 ?>
+<!-- <div class="container"> -->
 <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
   <strong> Already avalible Record!</strong> 
+</div>
 </div> -->
 
 <script>
-//   $(".alert").alert();
+//   $(".alert").alert(close);
 alert("already avalible");
 </script>
 <?php

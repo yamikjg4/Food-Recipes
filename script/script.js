@@ -1,3 +1,14 @@
+$(document).ready(function() {
+    $('#brand').mouseenter(function() {
+        $('#logo').hide(450);
+        $('#name').show(500);
+    });
+    $('#brand').mouseleave(function() {
+        $('#logo').show(500);
+        $('#name').hide(450);
+    });
+});
+
 function first() {
     var cheffirst = document.getElementById("fname").value;
     if (!(cheffirst.trim())) {
@@ -110,3 +121,7 @@ function password() {
         document.getElementById("password").style.color = "Red";
     }
 }
+window.onload = function() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("content").style.display = "block";
+};

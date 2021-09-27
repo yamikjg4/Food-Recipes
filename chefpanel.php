@@ -178,7 +178,7 @@ include("config.php");
             $total_page=ceil($no/$num_pages);
            for($k=1;$k<=$total_page;$k++){
             ?>
-          <a class="btn btn-primary btn-inline-block"href="chefpanel.php?page=<?php echo $k?>"><?php echo $k;?></a>
+         <a class="btn btn-primary btn-inline-block btn-sm"href="chefpanel.php?page=<?php echo $k?>"><?php echo $k;?></a>
 <?php
            }
 ?>
