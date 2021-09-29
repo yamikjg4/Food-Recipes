@@ -18,7 +18,7 @@
 </head>
 <body id="color">
 <div class="loader" id="loader">
-<img src="Pizza sliced.gif" alt="" class="image-fluid img">
+<img src="loader.gif" alt="" class="image-fluid img">
 <p class="heading">Chef-Recipes</p>
 </div>    
 <div id="content">

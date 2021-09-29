@@ -1,8 +1,9 @@
-<section class="bg-dark pt-5 text-white text-center">
-    <div class="container">
-            <div class="row">
+<footer class="bg-dark py-3 text-white text-md-center text-sm-center">
+<div class="container">
+      <div class="row">
         <div class="col-6">
             <h3 style="font-weight: 200;">Chef Recipes</h3>
+            <!-- <img src="LogoMakerCa-1629816030209.png" alt="" srcset="" class="img-fluid" width="100px"> -->
         </div>
         <div class="col-6">
         <h3 style="font-weight: 200;">Follow Me</h3>
@@ -13,11 +14,11 @@
      <i class="fab fa-instagram" style="font-size: 30px;color:red;"></i>     </a>
         </div>
     
-    <div class="col-md-12 col-12 mt-2">
-    <blockquote class="blockquote">
-        <p>© 2021 Copyright:||Chef-Recipes</p>
-    <p class="blockquote-footer">@Cmpica Studets</p>
-  </blockquote>
+    <div class="col-md-12 col-12 pt-3">
+        <blockquote class="blockquote">
+            <p>© 2021 Copyright:||Chef-Recipes</p>
+        <p class="blockquote-footer">@Cmpica Studets</p>
+    </blockquote>
     </div>
-    </div>
-</section>
+</div>
+</footer>
