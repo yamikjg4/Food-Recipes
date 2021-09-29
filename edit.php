@@ -129,11 +129,11 @@ else{
             <input id="fileName" class="form-control" type="file" name="uploadfile" value="<?php echo $show["Profile"];?>"  accept="image/x-png,image/gif,image/jpeg" onchange="validateFileType()">
        <!-- <span id="upload" style="color:red;"></span> -->
         </div>
-        <!-- <div class="form-group">
+        <div class="form-group">
             <label for="">Email id</label>
-            <input id="typeemail" class="form-control" type="text" name="email1" onclick="email()" onkeypress="checkvalid()" placeholder="Enter Chef Email id" style="border: 1px solid black;" value="<?php echo $show["Email"];?>" autocomplete="off">
-            <span id="email" style="color:red;"></span>
-        </div> -->
+            <input id="typeemail" class="form-control" type="text" name="email1" onclick="email()" onkeypress="checkvalid()" placeholder="Enter Chef Email id" style="border: 1px solid black;" value="<?php echo $show["Email"];?>" autocomplete="off" disabled>
+            <!-- <span id="email" style="color:red;"></span> -->
+        </div>
         <div class="form-group">
             <label for="">Password</label>
             <input type="password" class="form-control" name="password1" onclick="pass()" onkeypress="password()" id="pwd"  placeholder="Enter Password"> 
