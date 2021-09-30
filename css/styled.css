@@ -150,4 +150,8 @@ body::before {
     color: blue;
 }
 
+#sliders1 {
+    height: 350px;
+}
+
 @media Screen and(max-width:400px) and(min-width:0px) {}

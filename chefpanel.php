@@ -139,7 +139,7 @@ include("config.php");
         $page=1;
       }
       $start_page=($page-1)*05;
-      $show="SELECT Food_Name,category_name,Food_Image,Food_id  from food join category on category.cat_id=food.Cat_id limit $start_page,$num_pages";
+      $show="SELECT Food_Name,category.category_name,Food_Image,Food_id from food join category on food.Cat_id=category.cat_id WHERE Chef_id=$id limit $start_page,$num_pages";
       $resm=mysqli_query($con,$show);
       ?>
         </table>
@@ -172,7 +172,7 @@ include("config.php");
               </tbody>
             </table>
             <?php
-            $countno="SELECT * FROM food where Chef_id ='$id'";
+            $countno="SELECT Food_Name,category.category_name,Food_Image,Food_id from food join category on category.cat_id=food.Cat_id WHERE Chef_id=$id";
             $ressu=mysqli_query($con,$countno);
             $no=mysqli_num_rows($ressu);
             $total_page=ceil($no/$num_pages);

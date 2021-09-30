@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" >
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container">
             <a class="navbar-brand" href="#" id="brand">
         <img src="LogoMakerCa-1629816030209.png" class="image-fluid" width="50px" height="50px" style="border-radius: 50px;" id="logo">
@@ -15,7 +15,7 @@
                 <a class="nav-link" href="index.php" id="link">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" id="link">Chef</a>
+                <a class="nav-link" href="chefinfo.php" id="link">Chef</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="about.php" id="link">About Us</a>
