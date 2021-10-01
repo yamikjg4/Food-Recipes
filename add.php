@@ -19,29 +19,28 @@
     ?>
     <?php
     include("config.php");
-    $folder_err='';
+    // $folder_err='';
     $name_error='';
 if(isset($_POST['add'])){
     $fname=$_POST['cname'];
-    $filenameabc = $_FILES["uploadfile"]["name"]; 
-    $tempname = $_FILES["uploadfile"]["tmp_name"]; 
-    $folder = "image/".$filenameabc;
-    if (move_uploaded_file($tempname, $folder))  { 
-        $msg = "Image uploaded successfully"; 
+//     $filenameabc = $_FILES["uploadfile"]["name"]; 
+//     $tempname = $_FILES["uploadfile"]["tmp_name"]; 
+//     $folder = "image/".$filenameabc;
+//     if (move_uploaded_file($tempname, $folder))  { 
+//         $msg = "Image uploaded successfully"; 
 
-    }else{ 
-        $msg = "Failed to upload image"; 
-  } 
+//     }else{ 
+//         $msg = "Failed to upload image"; 
+//   } 
   $que="SELECT * FROM category WHERE category_name='$fname'";
   $exe=mysqli_query($con,$que);
   $count=mysqli_num_rows($exe);
   if(empty($fname)){
     $name_error = "Please Enter Name"; 
   }
-      
-  if(empty($filenameabc)){
-    $folder_err="<p>Pls Insert File</p>";
-  }
+//  if(empty($filenameabc)){
+//     $folder_err="<p>Pls Insert File</p>";
+//   }
 //  if(!(empty($filenameabc))){
 //     if($filenameabc != "image/jpeg" || $filenameabc != "image/png"){
 //     $folder_errr= "<p>This is not an image</p>";
@@ -56,7 +55,7 @@ if(isset($_POST['add'])){
    echo '<script>alert("Allready Created Category Previous");</script>';
   }
   else{
-    $quee="INSERT INTO category(category_name,category_image)VALUES('$fname','$folder')";
+    $quee="INSERT INTO category(category_name)VALUES('$fname')";
     $exe1=mysqli_query($con,$quee);
     if($exe1){
         echo '<script>alert("Category Inserted Sucessfully");</script>';
@@ -82,11 +81,6 @@ if(isset($_POST['add'])){
                       <input type="text" name="cname" id="name" class="form-control" onclick="addbutton()" onkeypress="check()" placeholder="Enter Category Name" aria-describedby="helpId" autocomplete="off">
                      <span id="cvalid" style="color:red"><?php echo $name_error;?></span>
                     </div>
-                    <div class="form-group">
-            <label for="">Upload Category Image</label>
-            <input id="fileName" class="form-control" type="file" name="uploadfile" accept="image/x-png,image/gif,image/jpeg" onchange="validateFileType()">
-             <span id="upload" style="color: red;"><?php echo $folder_err?></span>
-        </div>
     <div class="form-group">
         <button type="submit" name="add"class="btn btn-primary btn-block">ADD</button>
     </div>
@@ -112,20 +106,6 @@ if(isset($_POST['add'])){
         });
     </script>
     <script>
-     function validateFileType() {
-    var fileName = document.getElementById("fileName").value,
-        idxDot = fileName.lastIndexOf(".") + 1,
-        extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-    if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
-        document.getElementById("upload").innerHTML = "Verified Images";
-        document.getElementById("upload").style.color = "green";
-    } else {
-        document.getElementById("upload").innerHTML = "Only JPEG/PNG Allowed";
-        document.getElementById("upload").style.color = "Red";
-        alert("Only jpg/jpeg and png files are allowed!");
-    }
-}
-
 function addbutton(){
         var x=document.getElementById("name").value;
         if(!x.trim()){

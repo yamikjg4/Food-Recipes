@@ -64,7 +64,7 @@ include("template/template.php");
         $execute=mysqli_query($con,$query);?>
  <?php $i=1;?>
        
-          <div class="table-responive-sm" id="table1"style="display: none;">
+          <div class="table-responive-sm" id="table1" style="display: none;">
       <table class="table table-borderless table table-hover table-dark mt-3">
       <thead class="bg-success">  
       <tr>
@@ -82,7 +82,7 @@ include("template/template.php");
         <tr>
          
             <td><?php echo $i++;?></td>
-            <td><img src="<?php echo $result["Profile"];?>" style="height:75px;width:75px;"></td>
+            <td><img src="<?php echo $result["Profile"];?>" style="height:85px;width:75px;" class="img-fluid"></td>
             <td><?php echo $result["UserName"];?></td>
             <td><?php echo $result["Email"];?></td>
             <td><?php echo $result["role_name"];?></td>
@@ -110,7 +110,7 @@ include("template/template.php");
       <thead class="bg-warning">  
       <tr>
           <th>Category_id</th>
-          <th>Category_Image</th>
+          <!-- <th>Category_Image</th> -->
           <th>Category_Name</th>
           <th>Operation</th>
         </tr>
@@ -120,7 +120,7 @@ include("template/template.php");
         ?>
         <tr>
           <td><?php echo $j++;?></td>
-          <td><img src="<?php echo $output["category_image"];?>" style="width:75px; height:75px;"></td>
+          <!-- <td><img src="<?php echo $output["category_image"];?>" style="width:75px; height:75px;"></td> -->
           <td><?php echo $output["category_name"];?></td>
           <td>  <a href="delete.php?cid=<?php echo $output["cat_id"];?>" class="delte" onclick="return checkdelete()"><i class="fa fa-trash"></i></a></td>
         </tr>

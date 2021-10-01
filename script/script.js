@@ -125,3 +125,6 @@ window.onload = function() {
     document.getElementById("loader").style.display = "none";
     document.getElementById("content").style.display = "block";
 };
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}

@@ -82,7 +82,7 @@ include("config.php");
         
       <tr>
           <th>Category_id</th>
-          <th>Category_Image</th>
+          <!-- <th>Category_Image</th> -->
           <th>Category_Name</th>
           <!-- <th>Operation</th> -->
         </tr>
@@ -91,7 +91,7 @@ include("config.php");
 
         <tr>
           <td><?php echo $j++;?></td>
-          <td><img src="<?php echo $output["category_image"];?>" style="width:75px; height:75px;"></td>
+          <!-- <td><img src="<?php echo $output["category_image"];?>" style="width:75px; height:75px;"></td> -->
           <td><?php echo $output["category_name"];?></td>
           <!-- <td>  <a href="delete.php?cid=<?php echo $output["cat_id"];?>" class="delte" onclick="return checkdelete()"><i class="fa fa-trash"></i></a></td> -->
         </tr>

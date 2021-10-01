@@ -150,8 +150,19 @@ body::before {
     color: blue;
 }
 
+#link3:hover {
+    text-decoration: none;
+    color: blue;
+}
+
 #sliders1 {
     height: 350px;
+    width: auto;
 }
+
+
+/* .form-control {
+    border: 0.25px solid black;
+} */
 
 @media Screen and(max-width:400px) and(min-width:0px) {}
