@@ -21,9 +21,9 @@
   <?php include('template/header.php');?>  
   <section class="bg-light py-5" id="section1">
       <div class="container">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <p class="lead text-md-left text-center">Cooking With Chef</p>
+          <div class="d-flex justify-content-between align-items-center text-sm-left text-center">
+            <div class="w-100">
+                <p class="lead text-sm-left text-center">Cooking With Chef</p>
                 <a href="#chef" class="btn btn-primary">Chef</a>
             </div>
             <div id="carouselExampleSlidesOnly" class="carousel slide d-sm-block d-none" data-ride="carousel">
@@ -42,7 +42,7 @@
           </div>
       </div>
   </section>
-  <section id="chef" class="animate__animated animate__fadeInLeft animate__delay-30s mt-2">
+  <section id="chef" class="py-1 animate__animated animate__fadeInLeft animate__delay-30s mt-2">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-4">
@@ -51,7 +51,8 @@
             <div class="card-body py-3">
               <form action="<?php echo $_SERVER['PHP_SELF']?>"method="GET">
             <div class="input-group">
-   <input type="text" class="form-control" name="chef" autocomplete="off">
+   <input type="text" class="form-control" name="chef" placeholder="Search Chef" id="search">
+   
    <span class="input-group-btn pl-1">
         <button class="btn btn-primary" name="show"><i class="fa fa-search" aria-hidden="true"></i></button>
    </span>
@@ -65,16 +66,16 @@
               <?php
               if(isset($_GET['show'])){
                 $chef=$_GET['chef'];
-                $l=1;
-                $num_pages=9;
-                if(isset($_GET['page'])){
-                  $page=$_GET['page'];
-                }
-                else{
-                  $page=1;
-                }
-                $start_page=($page-1)*9;
-                $que="SELECT * FROM admin WHERE UserName like '%$chef%' AND role_id=2 limit $start_page,$num_pages";
+                // $l=1;
+                // $num_pages=9;
+                // if(isset($_GET['page'])){
+                //   $page=$_GET['page'];
+                // }
+                // else{
+                //   $page=1;
+                // }
+                // $start_page=($page-1)*9;
+                $que="SELECT * FROM admin WHERE UserName like '%$chef%' AND role_id=2";
                 $exe=mysqli_query($con,$que);
                ?>
               <meta http-equiv="refresh" content="60; URL='chefinfo.php'" /> 
@@ -93,15 +94,12 @@
                 $start_page=($page-1)*9;
                $que="SELECT id,UserName,Profile FROM admin WHERE role_id=2 limit $start_page,$num_pages";
                $exe=mysqli_query($con,$que);
-               if (!$exe) {
-                   $alert="No data Found"; ?>
- <meta http-equiv="refresh" content="4; URL='chefinfo.php'" /> 
-               <?php
-               }
+               
               }
               $check=mysqli_num_rows($exe)>0;
               if($check){
                 while ($res=mysqli_fetch_array($exe)) {
+                      // echo '<option value="'.$res['UserName'].'">"'.$res['UserName'].'"</option>';
                   ?>
         
           
@@ -112,8 +110,9 @@
               <div class="card">
                 <img class="card-img-top img-fluid" src="<?php echo $res["Profile"]; ?>" alt="" style="width:300px;height:300px;background-size:cover;">
                 <div class="card-body text-center">
+                  <!-- <form action="#" method="POST"> -->
                   <h4 class="card-title text-center"><?php echo $res["UserName"]; ?></h4>
-                  <a href="chefdata.php?id=<?php echo $res["id"];?>" class="btn btn-info">Info Chef</a>
+                  <a href="data.php?id=<?php echo $res["id"];?>" class="btn btn-info">Show Info</a>
                   <!-- <p class="card-text">Text</p> -->
                 </div>
               <!-- </div> -->
@@ -130,15 +129,17 @@
                 ?>
                 </div>
                 <?php
-            $countno="SELECT UserName,Profile FROM admin WHERE role_id=2";
-            $ressu=mysqli_query($con,$countno);
-            $no=mysqli_num_rows($ressu);
-            $total_page=ceil($no/$num_pages);
-           for($k=1;$k<=$total_page;$k++){
-            ?>
-         <a class="my-3 btn btn-primary btn-inline-block btn-sm"href="chefinfo.php?page=<?php echo $k?>"><?php echo $k;?></a>
+                if (!isset($_GET['show'])) {
+                    $countno="SELECT UserName,Profile FROM admin WHERE role_id=2";
+                    $ressu=mysqli_query($con, $countno);
+                    $no=mysqli_num_rows($ressu);
+                    $total_page=ceil($no/$num_pages);
+                    for ($k=1;$k<=$total_page;$k++) {
+                        ?>
+         <a class="my-3 btn btn-primary btn-inline-block btn-sm"href="chefinfo.php?page=<?php echo $k?>"><?php echo $k; ?></a>
 <?php
-           }
+                    }
+                }
 ?>
           </div>
           
@@ -148,17 +149,7 @@
     <!-- </div> -->
   </section>
   <!-- Content -->
-<section class="py-5">
-           <div class="container">
-             <!-- row -->
-             <div class="row">
-               <!-- col 1 -->
-               <div class="col-md-3 col-4">
-              <!-- contain -->
-               </div>
-             </div>
-           </div>
-</section>
+
   <?php include('template/footer.php');?>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

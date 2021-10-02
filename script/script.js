@@ -7,6 +7,18 @@ $(document).ready(function() {
         $('#logo').show(500);
         $('#name').hide(450);
     });
+    // $("#search").keypress(function() {
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: 'chefinfo.php',
+    //         data: {
+    //             name: $("#search").val(),
+    //         },
+    //         success: function(data) {
+    //             $("#output").html(data);
+    //         }
+    //     });
+    // });
 });
 
 function first() {

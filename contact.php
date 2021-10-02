@@ -24,15 +24,15 @@
     <section class="bg-light py-5">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
-                <div id="div2">
-                    <p class="lead">If You Need to Register Contact us</p>
+                <div id="div2" class="w-100 text-center text-sm-left">
+                    <p class="lead text-center text-sm-left">If You Need to Register Contact us</p>
                     <a href="#con" class="btn btn-primary">Contact-Us</a>
                 </div>
                 <img src="picture/sub.png" alt="" class="w-50 img-fluid d-sm-block d-none"  id="flex1">
             </div>
         </div>
     </section>
-    <section class="mt-2 py-5 animate__animated animate__fadeInLeft animate__delay-30s" id="section1">
+    <section class="py-5 animate__animated animate__fadeInLeft animate__delay-30s" id="section1">
         <div class="container">
         <div class="row">
             <div class="col-md-6 col-12">
