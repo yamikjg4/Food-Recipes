@@ -16,6 +16,7 @@
 </style>
     <title>Home</title>
 </head>
+<?php include('config.php');?>
 <body id="color">
 <div class="loader" id="loader">
 <img src="loader.gif" alt="" class="image-fluid img">
@@ -36,9 +37,98 @@
     </div>
   </div>
 </div>
-    <div class="container">
-
-    </div>
+    <section class="py-5 animate__animated animate__fadeInLeft animate__delay-30s">
+           <div class="container">
+             <!-- row -->
+             <div class="row">
+               <!-- col 1 -->
+               <div class="col-md-3 col-4">
+               <div class="card">
+                   <div class="card-header bg-primary"><p class="h5 text-white text-center">Filter</p></div>
+                   <!-- Card Body -->
+                   <div class="card-body">
+                   <div class="input-group">
+   <input list="output" type="text" class="form-control" name="chef" placeholder="Search Chef" id="search">
+ 
+   <span class="input-group-btn pl-1">
+        <button class="btn btn-primary" name="show"><i class="fa fa-search" aria-hidden="true"></i></button>
+   </span>
+</div>
+<ul class="list-group">
+<?php
+$sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By category.category_name";
+$exe=mysqli_query($con,$sql);
+while($result=mysqli_fetch_array($exe)){
+?>
+<li class="list-group-item">
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="checkbox" class="form-check-input" name="category[]" id="" value="<?php echo $result["Cat_id"];?>">
+      <?php echo $result["category_name"];?>
+    </label>
+  </div>
+  <!-- <input type="checkbox" id="category" name="category[]" value=""><label class="ml-1"></label> -->
+  </li>
+<?php } ?>
+</ul>
+</form>
+                   </div>
+               </div>
+               </div>
+               <div class="col-md-9 col-8">
+                   <div class="row">
+                    <?php
+                  $l=1;
+                  $num_pages=9;
+                  if(isset($_GET['page'])){
+                    $page=$_GET['page'];
+                  }
+                  else{
+                    $page=1;
+                  }
+                  $start_page=($page-1)*9;
+                  $show="SELECT * FROM food limit $start_page,$num_pages";
+                  $resm=mysqli_query($con,$show);
+                    if (mysqli_num_rows($resm)>0) {
+                        while ($resp=mysqli_fetch_array($resm)) {
+                            ?>
+                       <div class="col-md-4 col-6">
+                       <div class="card">
+                         <div class="inner">
+              <img class="card-img-top img-fluid" src="<?php echo $resp["Food_Image"]; ?>" alt="" style="width:300px;height:300px;background-size:cover;">
+              </div> 
+              <div class="card-body text-center">
+                  <h5 class="card-title text-center"><?php echo $resp["Food_Name"]; ?></h5>
+                  <a href="detail.php?id=<?php echo $resp["Food_id"];?>" class="btn btn-info">Show Recipe</a>
+                  <!-- <p class="card-text">Text</p> -->
+                </div>
+                       
+                       </div>
+                       </div>
+                      <?php
+                        }
+                    }
+                    else{
+                        echo "No Data Found";
+                    }
+                      ?> 
+                   </div>
+                   <?php
+                //    $id=$_GET['id'];
+            $countno="SELECT * FROM food";
+            $ressum=mysqli_query($con,$countno);
+            $no=mysqli_num_rows($ressum);
+            $total_page=ceil($no/$num_pages);
+           for($k=1;$k<=$total_page;$k++){
+            ?>
+         <a class="my-3 btn btn-primary btn-inline-block btn-sm" href="chefdata.php?page=<?php echo $k;?>"><?php echo $k;?></a>
+<?php
+           }
+?>
+               </div>
+             </div>
+           </div>
+</section>
     <?php include('template/footer.php')
     ?>
 </div>

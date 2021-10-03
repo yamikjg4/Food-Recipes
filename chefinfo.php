@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- FONTAWESOME : https://kit.fontawesome.com/a23e6feb03.js -->
-    <link rel="stylesheet"   href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.  5/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.  5/jquery.mCustomScrollbar.min.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styled.css">
@@ -49,10 +49,12 @@
           <div class="card mt-2">
             <div class="card-header text-center text-white bg-primary">Search-Chef</div>
             <div class="card-body py-3">
-              <form action="<?php echo $_SERVER['PHP_SELF']?>"method="GET">
+              <form action="#" method="POST">
             <div class="input-group">
-   <input type="text" class="form-control" name="chef" placeholder="Search Chef" id="search">
-   
+            <input list="output" type="text" name="chef" class="form-control" id="search">
+      <datalist id="output">
+        <!-- <option val="value">display test</option> -->
+      </datalist>
    <span class="input-group-btn pl-1">
         <button class="btn btn-primary" name="show"><i class="fa fa-search" aria-hidden="true"></i></button>
    </span>
@@ -64,8 +66,8 @@
           <div class="col-md-9 col-sm-8">
             <div class="row">
               <?php
-              if(isset($_GET['show'])){
-                $chef=$_GET['chef'];
+              if(isset($_POST['show'])){
+                $chef=$_POST['chef'];
                 // $l=1;
                 // $num_pages=9;
                 // if(isset($_GET['page'])){
@@ -129,7 +131,7 @@
                 ?>
                 </div>
                 <?php
-                if (!isset($_GET['show'])) {
+                if (!isset($_POST['show'])) {
                     $countno="SELECT UserName,Profile FROM admin WHERE role_id=2";
                     $ressu=mysqli_query($con, $countno);
                     $no=mysqli_num_rows($ressu);
@@ -152,8 +154,26 @@
 
   <?php include('template/footer.php');?>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="script/script.js"></script>
+<!-- <script type="text/javascript">
+  $(document).ready(function(){
+    $("#search").keypress(function(event){
+      $.ajax({
+        type:'POST',
+        url:'search.php',
+        data:{
+          name:$("#search").val(),
+        },
+        success:function(data){
+          event.preventDefault();
+          console.log("hi");
+          $("#output").html(data);
+        }
+      });
+    });
+   });
+</script> -->
 </html>

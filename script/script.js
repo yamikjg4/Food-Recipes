@@ -7,18 +7,34 @@ $(document).ready(function() {
         $('#logo').show(500);
         $('#name').hide(450);
     });
-    // $("#search").keypress(function() {
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: 'chefinfo.php',
-    //         data: {
-    //             name: $("#search").val(),
-    //         },
-    //         success: function(data) {
-    //             $("#output").html(data);
-    //         }
-    //     });
-    // });
+    $("#search").keypress(function(event) {
+        $.ajax({
+            type: 'POST',
+            url: 'search.php',
+            data: {
+                name: $("#search").val(),
+            },
+            success: function(data) {
+                event.preventDefault();
+                console.log("hi");
+                $("#output").html(data);
+            }
+        });
+    });
+    $("#search1").keypress(function(event) {
+        $.ajax({
+            type: 'POST',
+            url: 'searchd.php',
+            data: {
+                name: $("#search").val(),
+            },
+            success: function(data) {
+                event.preventDefault();
+                console.log("hi");
+                $("#output1").html(data);
+            }
+        });
+    });
 });
 
 function first() {
