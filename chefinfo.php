@@ -51,7 +51,7 @@
             <div class="card-body py-3">
               <form action="#" method="POST">
             <div class="input-group">
-            <input list="output" type="text" name="chef" class="form-control" id="search">
+            <input list="output" type="text" name="chef" class="form-control" id="search" autocomplete="off">
       <datalist id="output">
         <!-- <option val="value">display test</option> -->
       </datalist>
@@ -68,19 +68,10 @@
               <?php
               if(isset($_POST['show'])){
                 $chef=$_POST['chef'];
-                // $l=1;
-                // $num_pages=9;
-                // if(isset($_GET['page'])){
-                //   $page=$_GET['page'];
-                // }
-                // else{
-                //   $page=1;
-                // }
-                // $start_page=($page-1)*9;
                 $que="SELECT * FROM admin WHERE UserName like '%$chef%' AND role_id=2";
                 $exe=mysqli_query($con,$que);
                ?>
-              <meta http-equiv="refresh" content="60; URL='chefinfo.php'" /> 
+              <!-- <meta http-equiv="refresh" content="60; URL='chefinfo.php'" />  -->
                 <?php // unset($_POST['show']);
               }
               else{

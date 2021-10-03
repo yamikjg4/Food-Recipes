@@ -10,6 +10,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styled.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="icon" href="LogoMakerCa-1629816030209.png">
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
@@ -37,6 +40,39 @@
     </div>
   </div>
 </div>
+<?php
+    // $checked=[];
+    if (isset($_POST['show'])) {
+      if(!(empty($_POST['food'])) && isset($_POST['category'])){
+        $food=$_POST['food'];
+       $sql="SELECT * FROM food WHERE Food_Name like'%$food%' AND Cat_id IN (".implode(",",$_POST['category']).")";
+       $resm=mysqli_query($con, $sql);
+      }
+      else if(!(empty($_POST['food'])) && !(isset($_POST['category']))){
+        $food=$_POST['food'];
+        $sql="SELECT * FROM food WHERE Food_Name like'%$food%'";
+        $resm=mysqli_query($con, $sql);
+      }
+      else if(empty($_POST['food']) && isset($_POST['category'])){
+        $sql="SELECT * FROM food WHERE Cat_id IN (".implode(",",$_POST['category']).")";
+        $resm=mysqli_query($con, $sql);
+      }
+      else if(empty($_POST['food']) && !(isset($_POST['category']))){
+        $sql="SELECT * FROM food";
+        $resm=mysqli_query($con, $sql);
+      }
+    } else {
+        $l=1;
+        $num_pages=9;
+        if (isset($_GET['page'])) {
+            $page=$_GET['page'];
+        } else {
+            $page=1;
+        }
+        $start_page=($page-1)*9;
+        $show="SELECT * FROM food limit $start_page,$num_pages";
+        $resm=mysqli_query($con, $show);
+    } ?>
     <section class="py-5 animate__animated animate__fadeInLeft animate__delay-30s">
            <div class="container">
              <!-- row -->
@@ -44,12 +80,15 @@
                <!-- col 1 -->
                <div class="col-md-3 col-4">
                <div class="card">
+                 <form action="" method="post">
                    <div class="card-header bg-primary"><p class="h5 text-white text-center">Filter</p></div>
                    <!-- Card Body -->
                    <div class="card-body">
                    <div class="input-group">
-   <input list="output" type="text" class="form-control" name="chef" placeholder="Search Chef" id="search">
- 
+   <input list="output1" type="text" class="form-control" name="food" placeholder="Search Food" id="search1" autocomplete="off">
+   <datalist id="output1">
+        <!-- <option val="value">display test</option> -->
+      </datalist>
    <span class="input-group-btn pl-1">
         <button class="btn btn-primary" name="show"><i class="fa fa-search" aria-hidden="true"></i></button>
    </span>
@@ -57,19 +96,26 @@
 <ul class="list-group">
 <?php
 $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By category.category_name";
-$exe=mysqli_query($con,$sql);
-while($result=mysqli_fetch_array($exe)){
-?>
+    $exe=mysqli_query($con, $sql);
+    while ($result=mysqli_fetch_array($exe)) {
+        if (isset($_GET['size'])) :
+    if (in_array($result["cat_id"], $_POST['category'])) :
+        $size_check='checked="checked"'; else : $size_check="";
+        endif;
+        endif; ?>
 <li class="list-group-item">
   <div class="form-check">
     <label class="form-check-label">
-      <input type="checkbox" class="form-check-input" name="category[]" id="" value="<?php echo $result["Cat_id"];?>">
-      <?php echo $result["category_name"];?>
+      <input type="checkbox" class="form-check-input" name="category[]" id="" value="<?php echo $result["cat_id"]; ?>" <?=@$size_check?> >
+     
+      <label>
+      <?php echo $result["category_name"]; ?>
     </label>
   </div>
   <!-- <input type="checkbox" id="category" name="category[]" value=""><label class="ml-1"></label> -->
   </li>
-<?php } ?>
+<?php
+    } ?>
 </ul>
 </form>
                    </div>
@@ -78,17 +124,6 @@ while($result=mysqli_fetch_array($exe)){
                <div class="col-md-9 col-8">
                    <div class="row">
                     <?php
-                  $l=1;
-                  $num_pages=9;
-                  if(isset($_GET['page'])){
-                    $page=$_GET['page'];
-                  }
-                  else{
-                    $page=1;
-                  }
-                  $start_page=($page-1)*9;
-                  $show="SELECT * FROM food limit $start_page,$num_pages";
-                  $resm=mysqli_query($con,$show);
                     if (mysqli_num_rows($resm)>0) {
                         while ($resp=mysqli_fetch_array($resm)) {
                             ?>
@@ -99,7 +134,7 @@ while($result=mysqli_fetch_array($exe)){
               </div> 
               <div class="card-body text-center">
                   <h5 class="card-title text-center"><?php echo $resp["Food_Name"]; ?></h5>
-                  <a href="detail.php?id=<?php echo $resp["Food_id"];?>" class="btn btn-info">Show Recipe</a>
+                  <a href="detail.php?id=<?php echo $resp["Food_id"]; ?>" class="btn btn-info">Show Recipe</a>
                   <!-- <p class="card-text">Text</p> -->
                 </div>
                        
@@ -107,23 +142,24 @@ while($result=mysqli_fetch_array($exe)){
                        </div>
                       <?php
                         }
-                    }
+    }
                     else{
-                        echo "No Data Found";
-                    }
-                      ?> 
+                        echo "No Data Found Here";
+                    }?> 
                    </div>
                    <?php
-                //    $id=$_GET['id'];
+                   if (!isset($_POST['show'])) {
+                       //    $id=$_GET['id'];
             $countno="SELECT * FROM food";
-            $ressum=mysqli_query($con,$countno);
-            $no=mysqli_num_rows($ressum);
-            $total_page=ceil($no/$num_pages);
-           for($k=1;$k<=$total_page;$k++){
-            ?>
-         <a class="my-3 btn btn-primary btn-inline-block btn-sm" href="chefdata.php?page=<?php echo $k;?>"><?php echo $k;?></a>
+                       $ressum=mysqli_query($con, $countno);
+                       $no=mysqli_num_rows($ressum);
+                       $total_page=ceil($no/$num_pages);
+                       for ($k=1;$k<=$total_page;$k++) {
+                           ?>
+         <a class="my-3 btn btn-primary btn-inline-block btn-sm" href="chefdata.php?page=<?php echo $k; ?>"><?php echo $k; ?></a>
 <?php
-           }
+                       }
+                   }
 ?>
                </div>
              </div>

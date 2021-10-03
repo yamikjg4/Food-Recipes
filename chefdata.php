@@ -93,7 +93,7 @@ else{
                    <!-- Card Body -->
                    <div class="card-body">
                    <div class="input-group">
-   <input list="output1" type="text" class="form-control" name="food" placeholder="Search Food" id="search1">
+   <input list="output1" type="text" class="form-control" name="food" placeholder="Search Food" id="search1" autocomplete="off">
    <datalist id="output1">
         <!-- <option val="value">display test</option> -->
       </datalist>
@@ -132,7 +132,7 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
                <div class="col-md-9 col-8">
                    <div class="row">
                     <?php
-                    // if (mysqli_num_rows($resm)>0) {
+                    if (mysqli_num_rows($resm)>0) {
                         while ($resp=mysqli_fetch_array($resm)) {
                             ?>
                        <div class="col-md-4 col-6">
@@ -150,10 +150,10 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
                        </div>
                       <?php
                         }
-    // }
-                    // else{
-                    //     echo "No Data Found";
-                    // }?> 
+    }
+                    else{
+                        echo "No Data Found";
+                    }?> 
                    </div>
                    <?php
                    if (!isset($_POST['show'])) {
