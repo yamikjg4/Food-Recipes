@@ -35,6 +35,21 @@ $(document).ready(function() {
             }
         });
     });
+    $("#search2").keypress(function(event) {
+        $.ajax({
+            type: 'POST',
+            url: 'search2.php',
+            data: {
+                name: $("#output2").val(),
+            },
+            success: function(data) {
+                event.preventDefault();
+                console.log("hi");
+                $("#output2").html(data);
+            }
+        });
+    });
+
 });
 
 function first() {
@@ -149,10 +164,18 @@ function password() {
         document.getElementById("password").style.color = "Red";
     }
 }
+
 window.onload = function() {
     document.getElementById("loader").style.display = "none";
     document.getElementById("content").style.display = "block";
 };
 if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
+}
+textarea = document.querySelector("#autoresizing");
+textarea.addEventListener('input', autoResize, false);
+
+function autoResize() {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
 }
