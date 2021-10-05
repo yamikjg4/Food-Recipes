@@ -22,7 +22,12 @@
 <body>
     <?php include('config.php');?>
     <?php 
-    $id=$_GET['id'];
+    session_start();
+    if(!$_SESSION['ids']){
+        header("Location:index.php");
+    }
+    else{
+    $id=$_SESSION['ids'];
     $sql="SELECT * FROM food 
     Join process ON food.Food_id=process.Food_id
     WHERE food.Food_id=$id";
@@ -34,11 +39,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-12">
-                    <img src="<?php echo $array["Food_Image"];?>" alt="" srcset="" class="img-fluid">
+                    <img src="<?php echo $array["Food_Image"];?>" alt="" srcset="" class="img-fluid"> 
                 </div>
                 <div class="col-md-6 col-12 py-5">
                 <center> <h3 class="pb-1"><?php echo $array["Food_Name"];?></h3>
-                   <span class="bg-secondary p-1 text-white">Total-Time:<?php echo $array["Total_Time"];?>
+                   <span class="bg-secondary p-2 text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+  <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+</svg> Total-Time:<?php echo $array["Total_Time"];?>
                 </span>
                 <a href="#feed" class="d-block pt-1 linked">Be First Person Review</a>
                 </center>
@@ -88,12 +96,12 @@
                        <form action="#" method="post">
                            <div class="form-group">
                              <label for="">UserName</label>
-                             <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                             <input type="text" name="user" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
                              <!-- <small id="helpId" class="text-muted">Help text</small> -->
                            </div>
                            <div class="form-group">
                              <label for="">Feedback Type:</label>
-                             <select name="" id="" class="form-control">
+                             <select name="list" id="" class="form-control">
                                  <option value="1" disabled="disable" selected>Select Feedback Type</option>
                                  <option value="Excelente">Excelente</option>
                                  <option value="Good">Good</option>
@@ -103,17 +111,42 @@
                            </div>
                            <div class="form-group">
                                <label for="my-input">Comment</label>
-                               <textarea class="form-control" name="process" id="autoresizing" placeholder="Enter Food Recipes"></textarea>
+                               <textarea class="form-control" name="comment" id="autoresizing" placeholder="Enter Food Comment"></textarea>
                            </div>
                            <div class="text-center">
-                             <button class="btn btn-primary">Send Feedback</button>
+                             <button class="btn btn-primary" name="send">Send Feedback</button>
                            </div>
                        </form>
                    </div>
                </div>
            </div>
+           <?php
+           $err='';
+           if (isset($_POST['send'])) {
+               if (!(empty($_POST['user']))&& !(empty($_POST['comment'])) && isset($_POST['list'])) {
+                   $name=$_POST['user'];
+                  
+                   $sqlq="SELECT * FROM feedback WHERE 	Name='$name'";
+                   $query=mysqli_query($con, $sqlq);
+                   $count=mysqli_num_rows($query);
+                   if ($count>0) {
+                       $err="Record alreday avalible";
+                   } else {
+                       $comment=$_POST['comment'];
+                       $list=$_POST['list'];
+                       $insert="INSERT INTO feedback(Food_id,Name,feed_type,Comment)VALUES($id,'$name','$list','$comment')";
+                       $execute=mysqli_query($con, $insert);
+                       if ($execute) {?>
+                       <meta http-equiv="refresh" content="1;url=detail.php" />
+                    <?php
+                   }
+                   }
+               }
+           }
+           ?>
         </section>
-    <?php include('template/footer.php');?>
+    <?php include('template/footer.php');}
+    ?>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

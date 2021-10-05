@@ -48,7 +48,7 @@ include("session/session.php");
                     <a href="add.php"><i class="fas fa-hands-helping"></i>Categories</a>
                 </li>
                 <li>
-                    <a href=""><i class="fas fa-info"></i>Feedback</a>
+                    <a href="feedback.php"><i class="fas fa-info"></i>Feedback</a>
                 </li>
               
             </ul>

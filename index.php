@@ -134,7 +134,7 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
               </div> 
               <div class="card-body text-center">
                   <h5 class="card-title text-center"><?php echo $resp["Food_Name"]; ?></h5>
-                  <a href="detail.php?id=<?php echo $resp["Food_id"]; ?>" class="btn btn-info">Show Recipe</a>
+                  <a href="session.php?id=<?php echo $resp["Food_id"]; ?>" class="btn btn-info">Show Recipe</a>
                   <!-- <p class="card-text">Text</p> -->
                 </div>
                        
@@ -156,7 +156,7 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
                        $total_page=ceil($no/$num_pages);
                        for ($k=1;$k<=$total_page;$k++) {
                            ?>
-         <a class="my-3 btn btn-primary btn-inline-block btn-sm" href="chefdata.php?page=<?php echo $k; ?>"><?php echo $k; ?></a>
+         <a class="my-3 btn btn-primary btn-inline-block btn-sm" href="index.php?page=<?php echo $k; ?>"><?php echo $k; ?></a>
 <?php
                        }
                    }

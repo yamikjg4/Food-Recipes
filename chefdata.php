@@ -27,7 +27,11 @@
     header("location:chefinfo.php");
 }
 else{
-    $id=$_SESSION['id']; ?>
+    // session_reset();
+    $_POST['id']=$_SESSION['id'];
+    $id=$_POST['id']; 
+    // echo '<script>alert("'.$id.'");</script>';
+    ?>
     <section class="py-5">
         <div class="container">
         <div class="media">
@@ -142,7 +146,7 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
               </div> 
               <div class="card-body text-center">
                   <h5 class="card-title text-center"><?php echo $resp["Food_Name"]; ?></h5>
-                  <a href="detail.php?id=<?php echo $resp["Food_id"]; ?>" class="btn btn-info">Show Recipe</a>
+                  <a href="session.php?id=<?php echo $resp["Food_id"]; ?>" class="btn btn-info">Show Recipe</a>
                   <!-- <p class="card-text">Text</p> -->
                 </div>
                        
@@ -169,6 +173,7 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
                        }
                    }
 }
+
 ?>
                </div>
              </div>

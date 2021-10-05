@@ -65,18 +65,55 @@ include("config.php");
              </div>
             </div>
             <div class="col-md-3 col-6 p-1">
-            <div class="w-100" id="div4"><p class="h5 pt-5 text-center text-white">Feedback</div>
+            <div class="w-100" id="div4"><p class="h5 pt-5 text-center text-white">Feedback
+              <?php
+              $query="SELECT count(feed_type) FROM feedback 
+              JOIN food ON food.Food_id=feedback.Food_id
+              Where food.Chef_id=$id";
+              $executes=mysqli_query($con,$query);
+              $res=mysqli_fetch_array($executes);
+              ?>
+              <h6 class="text-center text-white">  <?php echo $res[0];?></h6>
+            </div>
             </div>
         </div>
-    </div>
-   
+    
+    <div class="table-responsive" id="table4" style="display: none;">
+   <table class="table table-dark mt-3">
+        <thead class="bg-success">
+        <th>Food Name</th>
+          <th>Name</th>
+          <th>Feedback type</th>
+          <th>Comment</th>
+        </thead>
+        <tbody>      
+          <?php
+          $querys="SELECT * FROM feedback 
+          JOIN food ON food.Food_id=feedback.Food_id
+          Where food.Chef_id=$id";
+          $repeat=mysqli_query($con,$querys);
+          while ($shok=mysqli_fetch_array($repeat)) {
+              ?> 
+         <tr>
+          <td><?php echo $shok["Food_Name"];?></td>
+          <td><?php echo $shok["Name"]?></td>
+          <td><?php echo $shok["feed_type"];?></td>
+          <td><?php echo $shok["Comment"];?></td>
+        </tr>
+        <?php
+          }
+        ?>
+        </tbody>
+
+   </table>
+   </div>
         <?php
         $que3="SELECT * FROM category";
         $exes=mysqli_query($con,$que3);
         ?>
         <tr>
           <?php $j=1;?>
-          <div class="table-responsive-sm" id="table1" style="display:none">
+          <div class="table-responsive" id="table1" style="display:none">
       <table class="table table-borderless table table-hover table-dark mt-3" >
       <thead class="bg-warning">  
         
@@ -183,6 +220,8 @@ include("config.php");
            }
 ?>
     </div>
+    </div>
+          
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -197,15 +236,24 @@ include("config.php");
                 $('#div1').click(function(){
                     $('#table1').toggle(300);
                     $('#table2').hide(150);
+                    $('#table4').hide(150);
                     $('#table3').hide();
                 });
                 $('#div2').click(function(){
                   $('#table1').hide(150);
+                  $('#table4').hide(150);
                   $('#table3').hide();
                   $('#table2').toggle(300);
                 });
                 $('#div3').click(function(){
                   $('#table3').toggle(300);
+                  $('#table4').hide(150);
+                    $('#table2').hide(150);
+                    $('#table1').hide();
+                });
+                $('#div4').click(function(){
+                  $('#table4').toggle(300);
+                  $('#table3').hide(150);
                     $('#table2').hide(150);
                     $('#table1').hide();
                 });
