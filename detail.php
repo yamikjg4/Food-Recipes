@@ -85,7 +85,9 @@
              <div class="container">
                  <h5 class="text-success">Process</h5>
                  <pre style="font-family: 'Lora', serif;font-size:16px;"><?php echo $array["Process"];?></pre>
-                 <span>Vidolink:&nbsp;<?php if($array["Link"]){echo $array["Link"]; }else{echo "Link Not avalible";}?></span>
+                 <?php if($array["Link"]){?>
+                 <a href="<?php echo $array["Link"];?>" class="btn btn-success">Video</a>
+                 <?php } ?>
              </div>
          </section>
         <section class="py-3" id="feed">
@@ -126,7 +128,7 @@
                if (!(empty($_POST['user']))&& !(empty($_POST['comment'])) && isset($_POST['list'])) {
                    $name=$_POST['user'];
                   
-                   $sqlq="SELECT * FROM feedback WHERE 	Name='$name'";
+                   $sqlq="SELECT * FROM feedback WHERE 	Name='$name' AND Food_id=$id";
                    $query=mysqli_query($con, $sqlq);
                    $count=mysqli_num_rows($query);
                    if ($count>0) {

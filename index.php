@@ -73,20 +73,20 @@
         $show="SELECT * FROM food limit $start_page,$num_pages";
         $resm=mysqli_query($con, $show);
     } ?>
-    <section class="py-5 animate__animated animate__fadeInLeft animate__delay-30s">
+    <section class="py-4 animate__animated animate__fadeInLeft animate__delay-30s">
            <div class="container">
              <!-- row -->
              <div class="row">
                <!-- col 1 -->
-               <div class="col-md-3 col-4">
-               <div class="card">
+               <div class="col-md-3 col-6">
+               <div class="card mt-2">
                  <form action="" method="post">
                    <div class="card-header bg-primary"><p class="h5 text-white text-center">Filter</p></div>
                    <!-- Card Body -->
                    <div class="card-body">
                    <div class="input-group">
-   <input list="output1" type="text" class="form-control" name="food" placeholder="Search Food" id="search1" autocomplete="off">
-   <datalist id="output1">
+   <input list="output2" type="text" class="form-control" name="food" placeholder="Search Food" id="search2" autocomplete="off">
+   <datalist id="output2">
         <!-- <option val="value">display test</option> -->
       </datalist>
    <span class="input-group-btn pl-1">
@@ -121,13 +121,13 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
                    </div>
                </div>
                </div>
-               <div class="col-md-9 col-8">
+               <div class="col-md-9 col-6">
                    <div class="row">
                     <?php
                     if (mysqli_num_rows($resm)>0) {
                         while ($resp=mysqli_fetch_array($resm)) {
                             ?>
-                       <div class="col-md-4 col-6">
+                       <div class="col-md-4 col-12 mt-2">
                        <div class="card">
                          <div class="inner">
               <img class="card-img-top img-fluid" src="<?php echo $resp["Food_Image"]; ?>" alt="" style="width:300px;height:300px;background-size:cover;">
@@ -169,8 +169,8 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
     ?>
 </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="script/script.js"></script>
 </html>

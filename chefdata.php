@@ -85,13 +85,13 @@ else{
         $show="SELECT * FROM food where Chef_id=$id limit $start_page,$num_pages";
         $resm=mysqli_query($con, $show);
     } ?>
-    <section class="py-5 animate__animated animate__fadeInLeft animate__delay-30s">
+    <section class="py-4 animate__animated animate__fadeInLeft animate__delay-30s">
            <div class="container">
              <!-- row -->
              <div class="row">
                <!-- col 1 -->
-               <div class="col-md-3 col-4">
-               <div class="card">
+               <div class="col-md-3 col-6">
+               <div class="card mt-2">
                  <form action="" method="post">
                    <div class="card-header bg-primary"><p class="h5 text-white text-center">Filter</p></div>
                    <!-- Card Body -->
@@ -133,13 +133,13 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
                    </div>
                </div>
                </div>
-               <div class="col-md-9 col-8">
+               <div class="col-md-9 col-6">
                    <div class="row">
                     <?php
                     if (mysqli_num_rows($resm)>0) {
                         while ($resp=mysqli_fetch_array($resm)) {
                             ?>
-                       <div class="col-md-4 col-6">
+                       <div class="col-md-4 col-12 mt-2">
                        <div class="card">
                          <div class="inner">
               <img class="card-img-top img-fluid" src="<?php echo $resp["Food_Image"]; ?>" alt="" style="width:300px;height:300px;background-size:cover;">

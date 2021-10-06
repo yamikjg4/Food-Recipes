@@ -26,7 +26,7 @@ $(document).ready(function() {
             type: 'POST',
             url: 'searchd.php',
             data: {
-                name: $("#search").val(),
+                name: $("#output1").val(),
             },
             success: function(data) {
                 event.preventDefault();
