@@ -128,12 +128,7 @@
                if (!(empty($_POST['user']))&& !(empty($_POST['comment'])) && isset($_POST['list'])) {
                    $name=$_POST['user'];
                   
-                   $sqlq="SELECT * FROM feedback WHERE 	Name='$name' AND Food_id=$id";
-                   $query=mysqli_query($con, $sqlq);
-                   $count=mysqli_num_rows($query);
-                   if ($count>0) {
-                       $err="Record alreday avalible";
-                   } else {
+                  
                        $comment=$_POST['comment'];
                        $list=$_POST['list'];
                        $insert="INSERT INTO feedback(Food_id,Name,feed_type,Comment)VALUES($id,'$name','$list','$comment')";
@@ -141,7 +136,7 @@
                        if ($execute) {?>
                        <meta http-equiv="refresh" content="1;url=detail.php" />
                     <?php
-                   }
+                   
                    }
                }
            }

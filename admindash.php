@@ -28,7 +28,7 @@ include("template/template.php");
         <div class="container">   
       <div class="row">
           <div class="col-md-4 col-6 p-1">
-              <div id="div1"class="w-100"><p class="h5 text-center pt-5 text-white">Chef</p>
+              <div id="div1"class="w-100 div"><p class="h5 text-center pt-5 text-white">Chef</p>
             <?php
             include ("config.php");
             $que1="SELECT COUNT(UserName)From admin WHERE role_id=2";
@@ -40,7 +40,7 @@ include("template/template.php");
             </div>
           </div>
           <div class="col-md-4 col-6 p-1">
-              <div id="div2"class="w-100"><p class="h5 text-center pt-5 text-white">Categories</p>
+              <div id="div2"class="w-100 div"><p class="h5 text-center pt-5 text-white">Categories</p>
               <?php
             // include ("config.php");
             $que2="SELECT COUNT(category_name)From category";
@@ -52,8 +52,15 @@ include("template/template.php");
             </div>
           </div>
           <div class="col-md-4 col-6 p-1">
-              <div id="div3"class="w-100"><p class="h5 text-center pt-5 text-white">Food-Recipes</p>
-              
+              <div id="div3"class="w-100 div"><p class="h5 text-center pt-5 text-white">Food-Recipes</p>
+              <?php
+            // include ("config.php");
+            $que3="SELECT COUNT(Food_Name)From food";
+            $exe2=mysqli_query($con,$que3);
+            $arr2=mysqli_fetch_array($exe2);
+            // $row=mysqli_num_rows($exe);
+            ?>
+             <h6 class="text-center text-white"><?php echo $arr2[0];?></h6>
             </div>
           </div>
       </div>
@@ -129,7 +136,35 @@ include("template/template.php");
       ?>
         </table>
     </div>
-        
+    <?php $k=1;?>
+<div class="table-responsive-sm" id="table3" style="display: none;">
+      <table class="table table-borderless table table-hover table-dark mt-3" >
+      <thead class="bg-warning">  
+      <tr>
+          <th>Food_id</th>
+          <th>Food_Image</th>
+          <th>Food_Name</th>
+          <th>Category_Name</th>
+          <th>Chef_Name</th>
+        </tr>
+        </thead>
+        <?php
+        $sqlquery="SELECT * FROM food join admin ON admin.id=food.Chef_id  join category ON category.cat_id=food.Cat_id ";
+        $resum=mysqli_query($con,$sqlquery);
+        while($output=mysqli_fetch_array($resum)){
+        ?>
+        <tr>
+          <td><?php echo $k++;?></td>
+          <td><img src="<?php echo $output["Food_Image"];?>" style="width:75px; height:75px;"></td>
+          <td><?php echo $output['Food_Name'];?></td>
+          <td><?php echo $output["category_name"];?></td>
+          <td><?php echo $output['UserName'];?></td>
+        </tr>
+        <?php
+      }
+      ?>
+        </table>
+    </div>
       
     
     </div>
@@ -153,10 +188,17 @@ include("template/template.php");
                 $('#div1').click(function(){
                     $('#table1').toggle(300);
                     $('#table2').hide(150);
+                    $('#table3').hide(150);
                 });
                 $('#div2').click(function(){
                   $('#table1').hide(150);
                   $('#table2').toggle(300);
+                  $('#table3').hide(150);
+                });
+                $('#div3').click(function(){
+                  $('#table1').hide(150);
+                  $('#table3').toggle(300);
+                  $('#table2').hide(150);
                 });
             });
             function checkdelete(){

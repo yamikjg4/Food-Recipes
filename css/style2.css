@@ -224,3 +224,19 @@ option {
     overflow: hidden;
     resize: none;
 }
+
+#div1:hover {
+    cursor: pointer;
+}
+
+#div2:hover {
+    cursor: pointer;
+}
+
+#div3:hover {
+    cursor: pointer;
+}
+
+#div4:hover {
+    cursor: pointer;
+}

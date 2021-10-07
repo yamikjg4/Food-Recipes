@@ -167,6 +167,7 @@ a[data-toggle="collapse"] {
 }
 
 #div1 {
+    /* cursor: pointer; */
     position: relative;
     height: 175px;
     border-radius: 20px;
@@ -177,7 +178,20 @@ a[data-toggle="collapse"] {
     background-color: #6240bd;
 }
 
+#div1:hover {
+    cursor: pointer;
+}
+
+#div2:hover {
+    cursor: pointer;
+}
+
+#div3:hover {
+    cursor: pointer;
+}
+
 #div2 {
+    /* cursor: pointer; */
     position: relative;
     height: 175px;
     border-radius: 20px;

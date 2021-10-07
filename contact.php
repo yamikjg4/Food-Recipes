@@ -37,22 +37,22 @@
         <div class="row">
             <div class="col-md-6 col-12">
             <div class="card mx-auto w-75">
-                  <img class="card-img-top w-100 img-fluid" src="picture/Yamik.jpg" alt="">
+                  <img class="card-img-top img-fluid" src="picture/Yamik.jpg" alt="" width="300px" height="200px">
                   <div class="card-body text-sm-center text-left" id="body">
                       <h6 class="card-title">Yamik Gandhi</h6>
-                      <p class="card-text">Mobile-NO:7069976533</p>
-                        <br>Email:<a href = "mailto:20MCA022@charusat.edu.in" id="link1">20MCA022@charusat.edu.in</a>
+                      <p class="card-text">Mobile-NO:7069976533
+                        Email:<a href = "mailto:20MCA022@charusat.edu.in" id="link1">20MCA022@charusat.edu.in</a>
                       </p>
                   </div>
               </div>
             </div>
             <div class="col-md-6 col-12">
             <div class="card w-75 mx-auto">
-                  <img class="card-img-top w-100 img-fluid" src="picture/MCA.jfif" alt="">
+                  <img class="card-img-top img-fluid" src="picture/MCA.jfif" alt="" width="300px" height="200px">
                   <div class="card-body text-center">
                       <h6 class="card-title">Maharshi Patel</h6>
                       <p class="card-text">Mobile-NO:9265008857
-                          <br>Email:<a href = "mailto:20MCA083@charusat.edu.in" id="link1">20MCA083@charusat.edu.in</a>
+                          Email:<a href = "mailto:20MCA083@charusat.edu.in" id="link1">20MCA083@charusat.edu.in</a>
                       </p>
                   </div>
               </div>

@@ -32,7 +32,7 @@ include("config.php");
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-6 p-1">
-                <div class="w-100" id="div1"><p class="h5 pt-5 text-center text-white">Category</p>
+                <div class="w-100 div" id="div1"><p class="h5 pt-5 text-center text-white">Category</p>
                 <?php
             // include ("config.php");
             $que2="SELECT COUNT(category_name)From category";
@@ -44,7 +44,7 @@ include("config.php");
             </div>
             </div>
             <div class="col-md-3 col-6 p-1">
-            <div class="w-100" id="div2"><p class="h5 pt-5 text-center text-white">Ingredant-Type</p>
+            <div class="w-100 div" id="div2"><p class="h5 pt-5 text-center text-white">Ingredant-Type</p>
             <?php
             $id=$_SESSION['u_id'];
             $count="SELECT COUNT(type_name)From ingredant_type WHERE id=$id ";
@@ -55,7 +55,7 @@ include("config.php");
     </div>
             </div>
             <div class="col-md-3 col-6 p-1">
-            <div class="w-100" id="div3"><p class="h5 pt-5 text-center text-white">Food-Recipe</p>
+            <div class="w-100 div" id="div3"><p class="h5 pt-5 text-center text-white">Food-Recipe</p>
             <?php
             $countque="SELECT COUNT(Food_Name) FROM food WHERE Chef_id=$id";
             $exek=mysqli_query($con,$countque);
@@ -65,7 +65,7 @@ include("config.php");
              </div>
             </div>
             <div class="col-md-3 col-6 p-1">
-            <div class="w-100" id="div4"><p class="h5 pt-5 text-center text-white">Feedback
+            <div class="w-100 div" id="div4"><p class="h5 pt-5 text-center text-white">Feedback
               <?php
               $query="SELECT count(feed_type) FROM feedback 
               JOIN food ON food.Food_id=feedback.Food_id
