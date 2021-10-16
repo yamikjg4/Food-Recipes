@@ -17,6 +17,7 @@
     <title>Document</title>
 </head>
 <body>
+    <?php $i=1;?>
     <?php
     include('template/template.php');
     include('config.php');
@@ -26,6 +27,7 @@
          <div class="table-responsive">
          <table class="table table-dark">
             <thead>
+                <th>No</th>
                 <th>Food Name</th>
                 <th>Feedback Type</th>
                 <th>Total Response</th>
@@ -41,6 +43,7 @@
                 while($res=mysqli_fetch_array($execute)){
                     ?>
                 <tr>
+                    <td><?php echo $i++;?></td>
                 <td><?php echo $res['Food_Name'];?></td>
                 <td><?php echo $res['feed_type'];?></td>
                 <td><?php echo $res['2'];?></td>

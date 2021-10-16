@@ -77,10 +77,11 @@ include("config.php");
             </div>
             </div>
         </div>
-    
+    <?php $m=1;?>
     <div class="table-responsive" id="table4" style="display: none;">
    <table class="table table-dark mt-3">
         <thead class="bg-success">
+          <th>No</th>
         <th>Food Name</th>
           <th>Name</th>
           <th>Feedback type</th>
@@ -95,6 +96,7 @@ include("config.php");
           while ($shok=mysqli_fetch_array($repeat)) {
               ?> 
          <tr>
+           <td><?php echo $m++;?></td>
           <td><?php echo $shok["Food_Name"];?></td>
           <td><?php echo $shok["Name"]?></td>
           <td><?php echo $shok["feed_type"];?></td>

@@ -86,7 +86,39 @@ if(isset($_POST['add'])){
     </div>
                 </form>
             </div>
+            <?php
+        $que3="SELECT * FROM category";
+        $exes=mysqli_query($con,$que3);
+        ?>
+       
+<?php $j=1;?>
+<div class="table-responsive" id="table2">
+      <table class="table table-borderless table table-hover table-dark mt-3" >
+      <thead class="bg-warning">  
+      <tr>
+          <th>Category_id</th>
+          <!-- <th>Category_Image</th> -->
+          <th>Category_Name</th>
+          <!-- <th>Operation</th> -->
+        </tr>
+        </thead>
+        <?php
+        while($output=mysqli_fetch_array($exes)){
+        ?>
+        <tr>
+          <td><?php echo $j++;?></td>
+          <!-- <td><img src="<?php echo $output["category_image"];?>" style="width:75px; height:75px;"></td> -->
+          <td><?php echo $output["category_name"];?></td>
+          <!-- <td>  <a href="delete.php?cid=<?php echo $output["cat_id"];?>" class="delte" onclick="return checkdelete()"><i class="fa fa-trash"></i></a></td> -->
+        </tr>
+        <?php
+      }
+      ?>
+        </table>
+    </div>
+    
         </div>
+        
           </div>
     </div>
     </div>
@@ -121,5 +153,8 @@ function addbutton(){
           document.getElementById("cvalid").style.color="green";  
         }
     }
+    if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
     </script>
 </html>

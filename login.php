@@ -86,8 +86,8 @@ if(isset($_POST['submit'])){
             <span id="password" style="display: block; color:red;"><?php echo $pass_error;?></span>
             <span class="text-center" style="display: block; color:red"><?php echo $msg;?>
             </span>
-            <a href="#" class="mt-3" onclick="alertmsg()">Forget Password</a>
-            <input type="Submit" value="Login" class="form-control mt-3" name="submit" />
+            <!-- <a href="#" class="mt-3" onclick="alertmsg()">Forget Password</a> -->
+            <input type="Submit" value="Login" class="form-control mt-2" name="submit" />
         </form>
     </div>
 
@@ -152,6 +152,9 @@ if(isset($_POST['submit'])){
         }
 
     }
+    if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
     //     function validation(){
     //         var a = document.getElementById("typeemail").value;
     //         var b = document.getElementById("pwd").value;

@@ -35,7 +35,7 @@
    $array=mysqli_fetch_array($res);
     ?>
     <?php include('template/header.php');?>
-    <section class="py-4">
+    <section class="py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-12">
@@ -84,9 +84,9 @@
          <section class="py-3  animate__animated animate__fadeIn animate__delay-30s">
              <div class="container">
                  <h5 class="text-success">Process</h5>
-                 <pre style="font-family: 'Lora', serif;font-size:16px;"><?php echo $array["Process"];?></pre>
+                 <pre style="font-family: 'Lora', serif;font-size:16px;overflow:none;white-space:pre-wrap;"><?php echo $array["Process"];?></pre>
                  <?php if($array["Link"]){?>
-                 <a href="<?php echo $array["Link"];?>" class="btn btn-success">Video</a>
+                 <a href="video.php?video=<?php echo $array["Link"];?>" class="btn btn-success">Video</a>
                  <?php } ?>
              </div>
          </section>

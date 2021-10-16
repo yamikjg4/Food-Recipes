@@ -328,6 +328,9 @@ function autoResize() {
     this.style.height = 'auto';
     this.style.height = this.scrollHeight + 'px';
 }
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
             </script>
             
 </body>
