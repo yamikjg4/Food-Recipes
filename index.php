@@ -64,11 +64,13 @@
     } else {
         $l=1;
         $num_pages=9;
-        if (isset($_GET['page'])) {
-            $page=$_GET['page'];
-        } else {
-            $page=1;
-        }
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        // if (isset($_GET['page'])) {
+        //     $page=$_GET['page'];
+        // } 
+        // else {
+        //     $page=1;
+        // }
         $start_page=($page-1)*9;
         $show="SELECT * FROM food limit $start_page,$num_pages";
         $resm=mysqli_query($con, $show);
@@ -150,20 +152,51 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
                    <?php
                    if (!isset($_POST['show'])) {
                        //    $id=$_GET['id'];
-            $countno="SELECT * FROM food";
+                       $countno="SELECT * FROM food";
                        $ressum=mysqli_query($con, $countno);
                        $no=mysqli_num_rows($ressum);
                        $total_page=ceil($no/$num_pages);
-                       for ($k=1;$k<=$total_page;$k++) {
-                           ?>
-         <a class="my-3 btn btn-primary btn-inline-block btn-sm" href="index.php?page=<?php echo $k; ?>"><?php echo $k; ?></a>
-<?php
-                       }
-                   }
-?>
+                       $Previous = $page - 1;
+                       $Next = $page + 1; ?>
+        <div class="m-4">        
+         <nav aria-label="Page navigation">
+					<ul class="pagination justify-content-center">
+				    <li>
+              <?php if($page==1){?>
+				      <a href="index.php?page=<?= $Previous+1; ?>" aria-label="Previous" class="btn btn-primary btn-sm d-none">
+				        <span aria-hidden="true">&laquo; Previous</span></a>
+              <?php } 
+              else{
+                  ?>
+                   <a href="index.php?page=<?= $Previous; ?>" aria-label="Previous" class="btn btn-primary btn-sm">
+				        <span aria-hidden="true">&laquo; Previous</span></a>
+            <?php
+              }
+            ?>
+				      
+				    </li>
+				    <?php for ($i = 1; $i<= $total_page; $i++) : ?>
+				    	<li><a href="index.php?page=<?= $i; ?>" class="btn btn-primary mx-1 btn-sm"><?= $i; ?></a></li>
+				    <?php endfor; ?>
+				    <li>
+              <?php if($total_page==$page){ ?>
+				      <a href="index.php?page=<?= $Next; ?>" aria-label="Next">
+				        <span aria-hidden="true" class="btn btn-primary mx-auto btn-sm d-none">Next &raquo;</span>
+				      </a>
+             <?php } elseif($total_page!=$page){ ?>
+              <a href="index.php?page=<?= $Next; ?>" aria-label="Next">
+				        <span aria-hidden="true" class="btn btn-primary mx-auto btn-sm d-none">Next &raquo;</span>
+				      </a>
+           <?php } ?>
+				    </li>
+				  </ul>
+				</nav>
                </div>
              </div>
            </div>
+           <?php
+                   } ?>
+                   </div>
 </section>
     <?php include('template/footer.php')
     ?>
