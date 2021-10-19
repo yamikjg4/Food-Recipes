@@ -45,33 +45,48 @@
     if (isset($_POST['show'])) {
       if(!(empty($_POST['food'])) && isset($_POST['category'])){
         $food=$_POST['food'];
-       $sql="SELECT * FROM food WHERE Food_Name like'%$food%' AND Cat_id IN (".implode(",",$_POST['category']).")";
+        $l=1;
+        $num_pages=6;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $start_page=($page-1)*6;
+       $sql="SELECT * FROM food WHERE Food_Name like'%$food%' AND Cat_id IN (".implode(",",$_POST['category']).") limit $start_page,$num_pages ";
        $resm=mysqli_query($con, $sql);
       }
       else if(!(empty($_POST['food'])) && !(isset($_POST['category']))){
         $food=$_POST['food'];
-        $sql="SELECT * FROM food WHERE Food_Name like'%$food%'";
+        $food=$_POST['food'];
+        $l=1;
+        $num_pages=6;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $start_page=($page-1)*6;
+        $sql="SELECT * FROM food WHERE Food_Name like'%$food%' limit $start_page,$num_pages ";
         $resm=mysqli_query($con, $sql);
       }
       else if(empty($_POST['food']) && isset($_POST['category'])){
-        $sql="SELECT * FROM food WHERE Cat_id IN (".implode(",",$_POST['category']).")";
+        $food=$_POST['food'];
+        $food=$_POST['food'];
+        $l=1;
+        $num_pages=6;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $start_page=($page-1)*6;
+        $sql="SELECT * FROM food WHERE Cat_id IN (".implode(",",$_POST['category']).") limit $start_page,$num_pages ";
         $resm=mysqli_query($con, $sql);
       }
       else if(empty($_POST['food']) && !(isset($_POST['category']))){
-        $sql="SELECT * FROM food";
+        $food=$_POST['food'];
+        $food=$_POST['food'];
+        $l=1;
+        $num_pages=6;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $start_page=($page-1)*6;
+        $sql="SELECT * FROM food limit $start_page,$num_pages ";
         $resm=mysqli_query($con, $sql);
       }
     } else {
         $l=1;
-        $num_pages=9;
+        $num_pages=6;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
-        // if (isset($_GET['page'])) {
-        //     $page=$_GET['page'];
-        // } 
-        // else {
-        //     $page=1;
-        // }
-        $start_page=($page-1)*9;
+        $start_page=($page-1)*6;
         $show="SELECT * FROM food limit $start_page,$num_pages";
         $resm=mysqli_query($con, $show);
     } ?>
@@ -158,6 +173,7 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
                        $total_page=ceil($no/$num_pages);
                        $Previous = $page - 1;
                        $Next = $page + 1; ?>
+
         <div class="m-4">        
          <nav aria-label="Page navigation">
 					<ul class="pagination justify-content-center">
@@ -179,11 +195,90 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
 				    	<li><a href="index.php?page=<?= $i; ?>" class="btn btn-primary mx-1 btn-sm"><?= $i; ?></a></li>
 				    <?php endfor; ?>
 				    <li>
-              <?php if($total_page==$page){ ?>
+              <?php if($total_page>$page){ ?>
 				      <a href="index.php?page=<?= $Next; ?>" aria-label="Next">
+				        <span aria-hidden="true" class="btn btn-primary mx-auto btn-sm">Next &raquo;</span>
+				      </a>
+             <?php } else{ ?>
+              <a href="index.php?page=<?= $Next; ?>" aria-label="Next">
 				        <span aria-hidden="true" class="btn btn-primary mx-auto btn-sm d-none">Next &raquo;</span>
 				      </a>
-             <?php } elseif($total_page!=$page){ ?>
+           <?php } ?>
+				    </li>
+				  </ul>
+				</nav>
+               </div>
+             </div>
+           </div>
+           <?php
+                   } ?>
+                    <?php
+                   if (isset($_POST['show'])) {
+                    if(!(empty($_POST['food'])) && isset($_POST['category'])){
+                      $food=$_POST['food'];
+                      //    $id=$_GET['id'];
+                      $countno="SELECT * FROM food WHERE Food_Name like'%$food%' AND Cat_id IN (".implode(",",$_POST['category']).")";
+                      $ressum=mysqli_query($con, $countno);
+                      $no=mysqli_num_rows($ressum);
+                      $total_page=ceil($no/$num_pages);
+                      $Previous = $page - 1;
+                      $Next = $page + 1;
+                     }
+                     else if(!(empty($_POST['food'])) && !(isset($_POST['category']))){
+                      $food=$_POST['food'];
+                      //    $id=$_GET['id'];
+                      $countno="SELECT * FROM food WHERE Food_Name like'%$food%'";
+                      $ressum=mysqli_query($con, $countno);
+                      $no=mysqli_num_rows($ressum);
+                      $total_page=ceil($no/$num_pages);
+                      $Previous = $page - 1;
+                      $Next = $page + 1;
+                     }
+                     else if(empty($_POST['food']) && isset($_POST['category'])){
+                      $food=$_POST['food'];
+                      //    $id=$_GET['id'];
+                      $countno="SELECT * FROM food WHERE Cat_id IN (".implode(",",$_POST['category']).")";
+                      $ressum=mysqli_query($con, $countno);
+                      $no=mysqli_num_rows($ressum);
+                      $total_page=ceil($no/$num_pages);
+                      $Previous = $page - 1;
+                      $Next = $page + 1;
+                     }
+                     else if(empty($_POST['food']) && !(isset($_POST['category']))){
+                      $countno="SELECT * FROM food";
+                      $ressum=mysqli_query($con, $countno);
+                      $no=mysqli_num_rows($ressum);
+                      $total_page=ceil($no/$num_pages);
+                      $Previous = $page - 1;
+                      $Next = $page + 1;}
+                    ?>
+
+        <div class="m-4">        
+         <nav aria-label="Page navigation">
+					<ul class="pagination justify-content-center">
+				    <li>
+              <?php if($page==1){?>
+				      <a href="index.php?page=<?= $Previous+1; ?>" aria-label="Previous" class="btn btn-primary btn-sm d-none">
+				        <span aria-hidden="true">&laquo; Previous</span></a>
+              <?php } 
+              else{
+                  ?>
+                   <a href="index.php?page=<?= $Previous; ?>" aria-label="Previous" class="btn btn-primary btn-sm">
+				        <span aria-hidden="true">&laquo; Previous</span></a>
+            <?php
+              }
+            ?>
+				      
+				    </li>
+				    <?php for ($i = 1; $i<= $total_page; $i++) : ?>
+				    	<li><a href="index.php?page=<?= $i; ?>" class="btn btn-primary mx-1 btn-sm"><?= $i; ?></a></li>
+				    <?php endfor; ?>
+				    <li>
+              <?php if($total_page>$page){ ?>
+				      <a href="index.php?page=<?= $Next; ?>" aria-label="Next">
+				        <span aria-hidden="true" class="btn btn-primary mx-auto btn-sm">Next &raquo;</span>
+				      </a>
+             <?php } else{ ?>
               <a href="index.php?page=<?= $Next; ?>" aria-label="Next">
 				        <span aria-hidden="true" class="btn btn-primary mx-auto btn-sm d-none">Next &raquo;</span>
 				      </a>
@@ -197,6 +292,7 @@ $sql="SELECT * FROM food JOIN category ON category.cat_id=food.Cat_id GROUP By c
            <?php
                    } ?>
                    </div>
+                   
 </section>
     <?php include('template/footer.php')
     ?>
